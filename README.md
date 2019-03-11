@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/systelab/cpp-test-utilities.svg?branch=master)](https://travis-ci.org/systelab/cpp-test-utilities)
+
 # C++ Test Utilities interface
 
 This repository contains a common interface for the test utilities used by the different C++ projects of Systelab organization.
