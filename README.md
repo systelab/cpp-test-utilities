@@ -29,12 +29,14 @@ namespace systelab { namespace test_utility {
     {
         if (expected.name != actual.name)
         {
-            return AssertionFailure() << "Different value for name: expected=" << expected.name << ", actual=" << actual.name;
+            return AssertionFailure() << "Different value for name: expected=" << expected.name
+                                      << ", actual=" << actual.name;
         }
 
         if (expected.age != actual.age)
         {
-            return AssertionFailure() << "Different value for age: expected=" << expected.age << ", actual=" << actual.age;
+            return AssertionFailure() << "Different value for age: expected=" << expected.age
+                                      << ", actual=" << actual.age;
         }
 
         ...
