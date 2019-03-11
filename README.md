@@ -92,6 +92,18 @@ Patient expectedEntity = {2, "Isabel Pantoja", 62, 1.75, false};
 EXPECT_CALL(service, createPatient(isEqualTo(expectedPatient)));
 ```
 
+### Comparison configuration
+
+It is possible to configure an entity comparator to exclude the comparison of a certain members. In order to do so, a configuration object needs to be provided when invoking the `() operator`:
+
+```cpp
+systelab::test_utilitiy::EntityComparatorConfiguration configuration;
+ASSERT_TRUE(systelab::test_utility:EntityComparator(configuration)(expectedEntity, actualEntity));
+```
+
+Aside from that, the implementation of the comparator needs to name the comparisons susceptible to be excluded. This can be achieved by directly accessing to the configuration object or by using the `COMPARATOR_ASSERT_EQUAL_WITH_EXCLUSION` macro:
+
+
 
 
 
