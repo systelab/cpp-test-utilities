@@ -81,7 +81,7 @@ COMPARATOR_ASSERT_NEAR(expected, actual, height, 1e-4);  // Compares an expressi
                                                          // (using a given tolerance)
 ```
 
-### isEqualTo matcher
+### isEqualTo() matcher
 
 Entity comparators can also be used when checking arguments for Google Mock function call expectations. Using the `isEqualTo` matcher, wrong method invokations can be troubleshooted:
 
