@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/systelab/cpp-test-utilities.svg?branch=master)](https://travis-ci.org/systelab/cpp-test-utilities)
+[![Build status](https://ci.appveyor.com/api/projects/status/d38dm9667hd7oq1c?svg=true)](https://ci.appveyor.com/project/systelab/cpp-test-utilities)
 
 # C++ Test Utilities interface
 
