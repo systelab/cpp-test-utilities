@@ -16,6 +16,7 @@ struct Patient
     std::string name;
     int age;
     bool male;
+    double height;
 };
 ```
 
@@ -50,17 +51,26 @@ Then it can be used on a unit test as follows:
 ```cpp
 TEST_F(PatientTest, testPatientsAreEqual)
 {
-    Patient expectedEntity = {"Nicolas Cage", 55, true};
-    Patient actualEntity = {"Nicolas Cage", 51, true};
+    Patient expectedEntity = {"Nicolas Cage", 55, 1.81, true};
+    Patient actualEntity = {"Nicolas Cage", 51, 1.81, true};
     ASSERT_TRUE(systelab::test_utility:EntityComparator()(expectedEntity, actualEntity));
 }
 ```
 
-The standard output for the previous test should be something like:
+The execution of this test should print something like:
 
 ```cpp
-`TBD
+Different value for age: expected=55, actual=51
 ```
 
+#### Helper macros
 
+Boilerplate code on `EntityComparator` implementations can be reduced significantlly by using some helper macros. They allow performing simple comparisons within a single line of code:
 
+```cpp
+COMPARATOR_ASSERT_EQUAL(expected, actual, name); // Compares an expression result by asserting it to be equal
+COMPARATOR_ASSERT_EQUAL(expected, actual, age); 
+COMPARATOR_ASSERT_EQUAL(expected, actual, male);
+COMPARATOR_ASSERT_NEAR(expected, actual, height, 1e-4);  // Compares an expression result by asserting it to be near
+                                                         // (using a given tolerance)
+```
