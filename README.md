@@ -1,6 +1,6 @@
 # C++ Test Utilities interface
 
-This repository contains a common interface for the test utilities used by the different Systelab projects.
+This repository contains a common interface for the test utilities used by the different C++ projects of Systelab organization.
 
 
 ## Entity comparators
