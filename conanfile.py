@@ -14,6 +14,7 @@ class TestUtilitiesInterfaceConan(ConanFile):
 
     def package(self):
         self.copy("*.h", dst="include/TestUtilitiesInterface", src="TestUtilitiesInterface")
+        self.copy("*.inl", dst="include/TestUtilitiesInterface", src="TestUtilitiesInterface")
 
     def package_info(self):
         self.info.header_only()
