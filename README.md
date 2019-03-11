@@ -40,12 +40,6 @@ namespace systelab { namespace test_utility {
                                       << ", actual=" << actual.name;
         }
 
-        if (expected.age != actual.age)
-        {
-            return AssertionFailure() << "Different value for age: expected=" << expected.age
-                                      << ", actual=" << actual.age;
-        }
-
         ...
 
         return AssertionSuccess();
@@ -58,7 +52,7 @@ Then it can be used on a unit test as follows:
 TEST_F(PatientTest, testPatientsAreEqual)
 {
     Patient expectedEntity = {1, "Nicolas Cage", 55, 1.81, true};
-    Patient actualEntity = {1, "Nicolas Cage", 51, 1.81, true};
+    Patient actualEntity = {1, "Nicole Kidman", 55, 1.81, true};
     ASSERT_TRUE(systelab::test_utility:EntityComparator()(expectedEntity, actualEntity));
 }
 ```
@@ -66,7 +60,7 @@ TEST_F(PatientTest, testPatientsAreEqual)
 The execution of this test should print something like:
 
 ```cpp
-Different value for age: expected=55, actual=51
+Different value for name: expected=Nicolas Cage, actual=Nicole Kidman
 ```
 
 ### Helper macros
