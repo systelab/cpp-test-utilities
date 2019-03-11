@@ -74,11 +74,13 @@ Different value for age: expected=55, actual=51
 Boilerplate code on entity comparators implementations can be reduced significantlly by using some helper macros. They allow performing simple comparisons within a single line of code:
 
 ```cpp
-COMPARATOR_ASSERT_EQUAL(expected, actual, name); // Compares an expression result by asserting it to be equal
+// Compares an expression result by asserting it to be equal
+COMPARATOR_ASSERT_EQUAL(expected, actual, name);
 COMPARATOR_ASSERT_EQUAL(expected, actual, age); 
 COMPARATOR_ASSERT_EQUAL(expected, actual, male);
-COMPARATOR_ASSERT_NEAR(expected, actual, height, 1e-4);  // Compares an expression result by asserting it to be near
-                                                         // (using a given tolerance)
+
+// Compares double/float expression result by asserting it to be near (using a given tolerance)
+COMPARATOR_ASSERT_NEAR(expected, actual, height, 1e-4);                                                   
 ```
 
 ### isEqualTo() matcher
