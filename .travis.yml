@@ -33,6 +33,6 @@ script:
 
 deploy:
   provider: script
-  script: conan upload "TestUtilitiesInterface/${TRAVIS_TAG:1}@systelab/stable" --all -r systelab-bintray
+  script: conan upload "TestUtilitiesInterface/${TRAVIS_TAG:1}@systelab/stable" --all -r systelab-bintray --force
   on:
     tags: true
