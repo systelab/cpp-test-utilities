@@ -1,23 +1,45 @@
-dist: xenial
 language: cpp
-compiler: gcc
 
 matrix:
   include:
-  - compiler: gcc
-    env: BUILD_TYPE=Release
-  - compiler: gcc
-    env: BUILD_TYPE=Debug
+  - os: linux
+    dist: xenial
+    compiler: gcc
+    addons:
+      apt:
+        sources:
+          - ubuntu-toolchain-r-test
+        packages:
+          - gcc-7
+          - g++-7
+    env:
+      - CONAN_BUILD_TYPE=Release
+      - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+      - COMPILER_LIBCXX=libstdc++11
 
-before_install:
-  - sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
-  - sudo apt-get update -qq
+  - os: linux
+    dist: xenial
+    compiler: gcc
+    addons:
+      apt:
+        sources:
+          - ubuntu-toolchain-r-test
+        packages:
+          - gcc-7
+          - g++-7
+    env:
+      - CONAN_BUILD_TYPE=Debug
+      - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+      - COMPILER_LIBCXX=libstdc++11
+
+  - os: osx
+    osx_image: xcode10.1
+    compiler: clang   
+    env:
+      - CONAN_BUILD_TYPE=Release
+      - COMPILER_LIBCXX=libc++
 
 install:
-  - sudo apt-get install -qq gcc-7
-  - sudo apt-get install -qq g++-7
-  - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 90
-  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 90
   - pip install conan --user
   - conan user
   - conan remote add systelab-bintray https://api.bintray.com/conan/systelab/conan
@@ -26,9 +48,9 @@ install:
 script:
   - |
     if [ -n "$TRAVIS_TAG" ]; then
-      conan export-pkg conanfile.py "TestUtilitiesInterface/${TRAVIS_TAG:1}@systelab/stable" -s build_type=${BUILD_TYPE};
+      conan export-pkg conanfile.py "TestUtilitiesInterface/${TRAVIS_TAG:1}@systelab/stable" -s build_type=${BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX};
     else
-      conan export-pkg conanfile.py "TestUtilitiesInterface/0.0.${TRAVIS_BUILD_NUMBER}@systelab/stable" -s build_type=${BUILD_TYPE};
+      conan export-pkg conanfile.py "TestUtilitiesInterface/0.0.${TRAVIS_BUILD_NUMBER}@systelab/stable" -s build_type=${BUILD_TYPE} -s compiler.libcxx=${COMPILER_LIBCXX};
     fi
 
 deploy:
