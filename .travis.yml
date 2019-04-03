@@ -5,13 +5,6 @@ matrix:
   - os: linux
     dist: xenial
     compiler: gcc
-    addons:
-      apt:
-        sources:
-          - ubuntu-toolchain-r-test
-        packages:
-          - gcc-7
-          - g++-7
     env:
       - CONAN_BUILD_TYPE=Release
       - COMPILER_LIBCXX=libstdc++11
@@ -19,13 +12,6 @@ matrix:
   - os: linux
     dist: xenial
     compiler: gcc
-    addons:
-      apt:
-        sources:
-          - ubuntu-toolchain-r-test
-        packages:
-          - gcc-7
-          - g++-7
     env:
       - CONAN_BUILD_TYPE=Debug
       - COMPILER_LIBCXX=libstdc++11
@@ -38,7 +24,8 @@ matrix:
       - COMPILER_LIBCXX=libc++
 
 install:
-  - pip install conan --user
+  - if [ $TRAVIS_OS_NAME == linux ]; then pip install conan --user; fi
+  - if [ $TRAVIS_OS_NAME == osx ]; then brew install conan; fi
   - conan user
   - conan remote add systelab-bintray https://api.bintray.com/conan/systelab/conan
   - conan --version
