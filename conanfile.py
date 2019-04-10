@@ -7,7 +7,7 @@ class TestUtilitiesInterfaceConan(ConanFile):
     url = "https://github.com/systelab/cpp-test-utilities"
     homepage = "https://github.com/systelab/cpp-test-utilities"
     author = "CSW <csw@werfen.com>"
-    topics = ("conan", "test", "utilities", "gtest")	
+    topics = ("conan", "test", "utilities", "gtest")
     license = "MIT"
     generators = "cmake"
     settings = "os", "compiler", "build_type", "arch"
