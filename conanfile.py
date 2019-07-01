@@ -9,7 +9,7 @@ class TestUtilitiesInterfaceConan(ConanFile):
     author = "CSW <csw@werfen.com>"
     topics = ("conan", "test", "utilities", "gtest")
     license = "MIT"
-    generators = "cmake"
+    generators = "cmake_find_package"
     settings = "os", "compiler", "build_type", "arch"
 
     def package(self):
