@@ -10,6 +10,7 @@ init:
 
 platform:
   - x64
+  - x86
 
 configuration:
   - Debug
@@ -23,7 +24,7 @@ install:
   - conan --version
 
 build_script:
-  - ps: conan export-pkg conanfile.py TestUtilitiesInterface/$env:appveyor_build_version@systelab/stable -s build_type=$env:configuration
+  - ps: conan export-pkg conanfile.py TestUtilitiesInterface/$env:appveyor_build_version@systelab/stable -s build_type=$env:configuration -s arch=$env:platform -s compiler.toolset=v141
 
 deploy_script:
   - ps: >- 
