@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 namespace systelab { namespace test_utility {
 
 	class EntityComparatorConfiguration
