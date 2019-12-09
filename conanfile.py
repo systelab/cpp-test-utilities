@@ -11,6 +11,8 @@ class TestUtilitiesInterfaceConan(ConanFile):
     license = "MIT"
     generators = "cmake_find_package"
     # No settings/options are necessary, this is header only
+    exports_sources = "*"
+
 
     def package(self):
         self.copy("*.h", dst="include/TestUtilitiesInterface", src="TestUtilitiesInterface")
