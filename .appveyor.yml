@@ -1,7 +1,5 @@
 version: '0.0.{build}'
 
-image: Visual Studio 2017
-
 init:
   - ps: >-
       if($env:appveyor_repo_tag -eq 'True') {
@@ -21,7 +19,7 @@ environment:
     platform: x64
 
 install:
-  - set PATH=%PATH%;%PYTHON%/Scripts/
+  - "SET PATH=%PYTHON%;%PYTHON%/Scripts/;%PATH%"
   - pip.exe install conan
   - conan user
   - conan remote add systelab-public https://systelab.jfrog.io/artifactory/api/conan/cpp-conan-production-local
