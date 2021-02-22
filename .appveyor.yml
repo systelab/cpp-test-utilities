@@ -14,11 +14,15 @@ platform:
 configuration:
   - Release
 
+environment:
+  - PYTHON: "C:\\Python36"
+  - CYG_ROOT: C:\cygwin64
+
 install:
   - set PATH=%PATH%;%PYTHON%/Scripts/
   - pip.exe install conan
   - conan user
-  - conan remote add systelab-bintray https://api.bintray.com/conan/systelab/conan
+  - conan remote add systelab-public https://systelab.jfrog.io/artifactory/api/conan/cpp-conan-production-local
   - conan --version
 
 build_script:
@@ -27,7 +31,8 @@ build_script:
 deploy_script:
   - ps: >- 
       if($env:appveyor_repo_tag -eq 'True') {
-        conan upload TestUtilitiesInterface/$env:appveyor_build_version@systelab/stable --all -r systelab-bintray --force
+        conan upload TestUtilitiesInterface/$env:appveyor_build_version@systelab/stable --all -r systelab-public --force
       } else {
         echo "Not uploading because this is not a tag build"
       }
+  - '%CYG_ROOT%/bin/bash -lc "cd $APPVEYOR_BUILD_FOLDER; ./ci/build_docs.sh -o \"systelab\" -s \"cpp-test-utilities\" -t \"$APPVEYOR_REPO_TAG_NAME\" -c AppVeyor -n \"$APPVEYOR_BUILD_WORKER_IMAGE %PLATFORM% %CONFIGURATION%\" -j \"$APPVEYOR_JOB_ID\"'
