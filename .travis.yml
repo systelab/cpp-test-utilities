@@ -4,7 +4,9 @@ matrix:
   include:
   - os: linux
     dist: xenial
+    language: python
     compiler: gcc
+    python: "3.7"
     addons:
       apt:
         sources:
@@ -13,6 +15,7 @@ matrix:
           - gcc-7
           - g++-7
     env:
+      - COMPILER_NAME=gcc-7
       - BUILD_TYPE=Release
       - CONAN_BUILD_TYPE=Release
       - COMPILER_LIBCXX=libstdc++11
@@ -22,7 +25,7 @@ install:
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 90
   - pip install conan --user
   - conan user
-  - conan remote add systelab-bintray https://api.bintray.com/conan/systelab/conan
+  - conan remote add systelab-public https://systelab.jfrog.io/artifactory/api/conan/cpp-conan-production-local
   - conan --version
 
 script:
@@ -34,7 +37,12 @@ script:
     fi
 
 deploy:
-  provider: script
-  script: conan upload "TestUtilitiesInterface/${TRAVIS_TAG:1}@systelab/stable" --all -r systelab-bintray --force
-  on:
-    tags: true
+  - provider: script
+    script: conan upload "TestUtilitiesInterface/${TRAVIS_TAG:1}@systelab/stable" --all -r systelab-public --force
+    on:
+      tags: true
+  - provider: script
+    script: bash ./ci/build_docs.sh -o "systelab" -s "cpp-test-utilities" -t "${TRAVIS_TAG}" -c "Travis" -n "${COMPILER_NAME} ${BUILD_TYPE}" -j "${TRAVIS_JOB_ID}"
+    skip_cleanup: true
+    on:
+      tags: true
