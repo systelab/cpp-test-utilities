@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/systelab/cpp-test-utilities.svg?branch=master)](https://travis-ci.org/systelab/cpp-test-utilities)
 [![Build status](https://ci.appveyor.com/api/projects/status/ykvrsfxjfgm92655?svg=true)](https://ci.appveyor.com/project/systelab/cpp-test-utilities)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/65e2d8a6618948d2a7174a3d50287caf)](https://www.codacy.com/app/systelab/cpp-test-utilities?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=systelab/cpp-test-utilities&amp;utm_campaign=Badge_Grade)
-[![Download](https://api.bintray.com/packages/systelab/conan/TestUtilitiesInterface:systelab/images/download.svg)](https://bintray.com/systelab/conan/TestUtilitiesInterface:systelab/_latestVersion)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/2480d1b1bfa1410ca1534af39b2900df)](https://www.codacy.com/gh/systelab/cpp-test-utilities/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=systelab/cpp-test-utilities&amp;utm_campaign=Badge_Grade)
+
 
 # C++ Test Utilities interface
 
