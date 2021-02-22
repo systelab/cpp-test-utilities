@@ -15,8 +15,9 @@ configuration:
   - Release
 
 environment:
-  - PYTHON: "C:\\Python36"
-  - CYG_ROOT: C:\cygwin64
+  global:
+    PYTHON: "C:\\Python36"
+    CYG_ROOT: C:\cygwin64
 
 install:
   - set PATH=%PATH%;%PYTHON%/Scripts/
