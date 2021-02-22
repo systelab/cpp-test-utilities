@@ -8,9 +8,6 @@ init:
         Update-AppveyorBuild -Version "$($env:APPVEYOR_REPO_TAG_NAME.TrimStart("v"))"
       }
 
-platform:
-  - x64
-
 configuration:
   - Release
 
@@ -18,6 +15,10 @@ environment:
   global:
     PYTHON: "C:\\Python36"
     CYG_ROOT: C:\cygwin64
+
+  matrix:
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    platform: x64
 
 install:
   - set PATH=%PATH%;%PYTHON%/Scripts/
