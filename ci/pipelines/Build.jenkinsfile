@@ -68,7 +68,7 @@ pipeline
 				{
 					props.conanHeaderPackages.split(',').each
 					{ headerPkg ->
-						sh script: "conan export-pkg ${headerPkg}/conanfile.py ${headerPkg}/${version}@systelab/${channel} --build-folder ${headerPkg} --force", label: "Build conan package for ${headerPkg}"
+						sh script: "conan export-pkg conanfile.py ${headerPkg}/${version}@systelab/${channel} --force", label: "Build conan package for ${headerPkg}"
 					}
 				}           
             }
