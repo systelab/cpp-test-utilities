@@ -34,6 +34,7 @@ pipeline
 				script 
 				{
 					version = params.version
+					channel = params.stable ? "stable" : "testing"
 				}
 				deleteDir()
 				checkout(
