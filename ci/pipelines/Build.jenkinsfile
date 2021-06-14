@@ -3,11 +3,11 @@ def version = "0.0.0"
 
 pipeline
 {
-    agent
-    {
-        label 'lib-build'
-    }
-	
+	agent
+	{
+		label 'lib-build'
+	}
+
 	parameters
 	{
 		booleanParam( name: 'uploadTestingPkg',
@@ -15,90 +15,66 @@ pipeline
 					  defaultValue: false )
 	}
 
-    options
-    {
-        skipDefaultCheckout(true)
-        disableConcurrentBuilds()
-        buildDiscarder(logRotator(numToKeepStr: '5'))
-    }
+	options
+	{
+		skipDefaultCheckout(true)
+		disableConcurrentBuilds()
+		buildDiscarder(logRotator(numToKeepStr: '5'))
+	}
 
-    stages
-    {
-        stage('Checkout')
+	stages
+	{
+		stage('Checkout')
 		{
 			steps
 			{
 				deleteDir()
 				checkout(
-                    changelog: true,
-                    poll: true,
-                    scm: [
-                        $class: 'GitSCM',
-                        branches: scm.branches,
-                        extensions: scm.extensions + 
-                            [[
-                                $class: 'CloneOption',
-                                shallow: true,
-                                noTags: true,
-                                reference: '',
-                                timeout: 10
-                            ]],
-                        userRemoteConfigs: scm.userRemoteConfigs
-                    ]
-                )
+					changelog: true,
+					poll: true,
+					scm: [
+						$class: 'GitSCM',
+						branches: scm.branches,
+						extensions: scm.extensions + 
+							[[
+								$class: 'CloneOption',
+								shallow: true,
+								noTags: true,
+								reference: '',
+								timeout: 10
+							]],
+						userRemoteConfigs: scm.userRemoteConfigs
+					]
+				)
 			}
 		}
-        stage('Read properties')
-        {
-            steps
-            {
-                script
-                {
-                    println 'Reading pipeline properties'
-                    props = readProperties file:'ci/pipelines/pipeline.properties'
-                    props.each { propKey, propValue -> println "${propKey}: ${propValue}" }
-                }
-            }
-        }
-        stage('Build')
-        {
-            steps
-            {
-                script
-				{
-					props.conanHeaderPackages.split(',').each
-					{ headerPkg ->
-						sh script: "conan export-pkg conanfile.py ${headerPkg}/${version}@systelab/${channel} --force", label: "Build conan package for ${headerPkg}"
-					}
-				}           
-            }
-        }
-        stage('SonarQube Upload')
+		stage('Read properties')
 		{
 			steps
 			{
 				script
 				{
-					try
-					{
-						scannerHome = tool 'SonarQubeScanner'
-						withSonarQubeEnv('SonarQube')
-						{
-							bat script: "${scannerHome}bin\\sonar-scanner.bat -Dproject.settings=sonar-project.properties -Dsonar.branch.name=${env.BRANCH_NAME} -Dsonar.projectVersion=${version}/${channel}", label: "SonarQube analysis"
-						}
-						timeout(time: 15, unit: 'MINUTES')
-						{
-							waitForQualityGate abortPipeline: false
-						}
-					}
-					catch (Exception err)
-					{
-						currentBuild.result = 'UNSTABLE'
+					println 'Reading pipeline properties'
+					props = readProperties file:'ci/pipelines/pipeline.properties'
+					props.each { propKey, propValue -> println "${propKey}: ${propValue}" }
+				}
+			}
+		}
+
+		stage('Build')
+		{
+			steps
+			{
+				script
+				{
+					props.conanHeaderPackages.split(',').each
+					{ headerPkg ->
+						sh script: "conan export-pkg conanfile.py ${headerPkg}/${version}@systelab/${channel} --force", label: "Build conan package for ${headerPkg}"
 					}
 				}
 			}
 		}
-		
+
 		stage('Deploy')
 		{
 			when
@@ -116,13 +92,13 @@ pipeline
 				}
 			}
 		}
-    }
-    post
-    {
-        always
-        {
-            publishCppcheck pattern: "report/*_cppcheck.xml", newThreshold: "5", threshold: "5", newFailureThreshold: "3", failureThreshold: "7", severityError: true, severityWarning: true
-        }
-    }
-    
+	}
+
+	post
+	{
+		always
+		{
+			publishCppcheck pattern: "report/*_cppcheck.xml", newThreshold: "5", threshold: "5", newFailureThreshold: "3", failureThreshold: "7", severityError: true, severityWarning: true
+		}
+	}
 }
