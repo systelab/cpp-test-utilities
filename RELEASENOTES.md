@@ -1,5 +1,12 @@
 # Summary of changes
 
+## Changes for version 1.0.7 (14 Jun 2021)
+
+### Bug Fixes
+
+- Added pipelines to support continuous integration on Jenkins
+
+
 ## Changes for version 1.0.6 (30 Mar 2021)
 
 ### Bug Fixes
