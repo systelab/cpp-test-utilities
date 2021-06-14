@@ -25,7 +25,6 @@ install:
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 90
   - pip install conan
   - conan user
-  - conan remote add systelab-public https://csw.jfrog.io/artifactory/api/conan/cpp-conan-production-local --insert 0
   - conan --version
 
 script:
@@ -37,10 +36,6 @@ script:
     fi
 
 deploy:
-  - provider: script
-    script: conan upload "TestUtilitiesInterface/${TRAVIS_TAG:1}@systelab/stable" --all -r systelab-public --force
-    on:
-      tags: true
   - provider: script
     script: bash ./ci/build_docs.sh -o "systelab" -s "cpp-test-utilities" -t "${TRAVIS_TAG}" -c "Travis" -n "${COMPILER_NAME} ${BUILD_TYPE}" -j "${TRAVIS_JOB_ID}"
     skip_cleanup: true
