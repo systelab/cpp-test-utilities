@@ -55,7 +55,7 @@ pipeline
                 script
                 {
                     println 'Reading pipeline properties'
-                    props = readProperties file:'build/pipelines/pipeline.properties'
+                    props = readProperties file:'ci/pipelines/pipeline.properties'
                     props.each { propKey, propValue -> println "${propKey}: ${propValue}" }
                 }
             }
