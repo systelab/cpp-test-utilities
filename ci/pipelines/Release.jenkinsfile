@@ -41,7 +41,7 @@ pipeline
 					poll: true,
 					scm: [
 						$class: 'GitSCM',
-						branches: [[name: 'refs/tags/${version}']],
+						branches: [[name: 'refs/tags/v${version}']],
 						extensions: scm.extensions + 
 							[[
 								$class: 'CloneOption',
