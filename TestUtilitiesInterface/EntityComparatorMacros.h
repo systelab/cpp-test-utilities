@@ -27,3 +27,9 @@ using namespace testing;
 			return AssertionFailure() << "Result for expression " #EXPRESSION " is different: expected=" << EXPECTED.EXPRESSION << ", actual=" << TO_TEST.EXPRESSION;\
 		}\
 	}
+
+#define ENTITY_COMPARATOR_ASSERT_EQUAL(EXPECTED, TO_TEST) \
+	{ \
+		auto result = EntityComparator()(EXPECTED, TO_TEST); \
+		if (!result) { return result; } \
+	}
