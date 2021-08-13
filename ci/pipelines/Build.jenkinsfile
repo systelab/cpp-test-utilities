@@ -88,7 +88,7 @@ pipeline
 				{
 					props.conanUploadPackages.split(',').each
 					{ uploadPkg ->
-						sh script: "conan upload ${uploadPkg}/${version}@systelab/${channel} --all -r newton-conan-production-local --force", label: "Deploy conan packet for ${uploadPkg}"
+						sh script: "conan upload ${uploadPkg}/${version}@systelab/${channel} --all -r systelab-conan-local --force", label: "Deploy conan packet for ${uploadPkg}"
 					}
 				}
 			}
