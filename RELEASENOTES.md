@@ -4,6 +4,7 @@
 
 ### Bug Fixes
 
+- Deploy conan package into remote specific for C++ task force
 - Fixed use of "export_sources" definition in conan recipe
 
 
