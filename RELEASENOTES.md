@@ -1,5 +1,12 @@
 # Summary of changes
 
+## Changes for version 1.0.8 (13 Aug 2021)
+
+### Bug Fixes
+
+- Fixed use of "export_sources" definition in conan recipe
+
+
 ## Changes for version 1.0.7 (14 Jun 2021)
 
 ### Bug Fixes
