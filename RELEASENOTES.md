@@ -1,6 +1,6 @@
 # Summary of changes
 
-## Changes for version 1.0.8 (13 Aug 2021)
+## Changes for version 1.0.8 (7 Sep 2021)
 
 ### Bug Fixes
 
