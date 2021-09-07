@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/systelab/cpp-test-utilities.svg?branch=master)](https://travis-ci.org/systelab/cpp-test-utilities)
-[![Build status](https://ci.appveyor.com/api/projects/status/ykvrsfxjfgm92655?svg=true)](https://ci.appveyor.com/project/systelab/cpp-test-utilities)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/2480d1b1bfa1410ca1534af39b2900df)](https://www.codacy.com/gh/systelab/cpp-test-utilities/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=systelab/cpp-test-utilities&amp;utm_campaign=Badge_Grade)
 
 
