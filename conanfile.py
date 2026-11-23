@@ -1,22 +1,25 @@
-from conans import ConanFile
-
+from conan import ConanFile
+from conan.tools.files import copy
+import os
 
 class TestUtilitiesInterfaceConan(ConanFile):
-    name = "TestUtilitiesInterface"
+    name = "test-utilities-interface"
     description = "C++ Test Utilities interface"
     url = "https://github.com/systelab/cpp-test-utilities"
     homepage = "https://github.com/systelab/cpp-test-utilities"
     author = "CSW <csw@werfen.com>"
     topics = ("conan", "test", "utilities", "gtest")
     license = "MIT"
-    generators = "cmake_find_package"
-    # No settings/options are necessary, this is header only
+
+    package_type = "header-library"
     exports_sources = "*.h", "*.inl"
 
-
     def package(self):
-        self.copy("*.h", dst="include/TestUtilitiesInterface", src="TestUtilitiesInterface")
-        self.copy("*.inl", dst="include/TestUtilitiesInterface", src="TestUtilitiesInterface")
+        include_src = os.path.join(self.source_folder, "TestUtilitiesInterface")
+        include_dst = os.path.join(self.package_folder, "include", "TestUtilitiesInterface")
+        
+        copy(self, "*.h", dst=include_dst, src=include_src)
+        copy(self, "*.inl", dst=include_dst, src=include_src)
 
     def package_info(self):
-        self.info.header_only()
+        self.cpp_info.includedirs = ["include"]
